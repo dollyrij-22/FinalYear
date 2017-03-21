@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        username = getIntent().getStringExtra("username");
+        if(username!=null) {
             try {
                 if (ActivityCompat.checkSelfPermission(this, mPermission)
                         != MockPackageManager.PERMISSION_GRANTED) {
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 DateFormat date = new SimpleDateFormat("HH:mm");
 
                 String localTime = date.format(currentLocalTime);
+
                 @Override
                 public void onClick(View arg0) {
                     // create class object
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
                                 + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
-                        new BackGround().execute(longi, lat, fdate, username,localTime);
+                        new BackGround().execute(longi, lat, fdate, username, localTime);
                     } else {
                         // can't get location
                         // GPS or Network is not enabled
@@ -97,6 +99,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+        }
+        else
+        {
+            this.finish();
+            Toast.makeText(getApplicationContext(), "Incorrect Username or password !!!\n or Check your Internet connection", Toast.LENGTH_LONG).show();
+        }
         }
     class BackGround extends AsyncTask<String, String, String> {
 

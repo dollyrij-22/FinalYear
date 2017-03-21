@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(username!=null)
-        {
+
             try {
                 if (ActivityCompat.checkSelfPermission(this, mPermission)
                         != MockPackageManager.PERMISSION_GRANTED) {
@@ -99,11 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        else {
-            this.finish();
-            Toast.makeText(getApplicationContext(), "Incorrect Username or password !!!\n or Check your Internet connection", Toast.LENGTH_LONG).show();
-        }
-    }
     class BackGround extends AsyncTask<String, String, String> {
 
         @Override

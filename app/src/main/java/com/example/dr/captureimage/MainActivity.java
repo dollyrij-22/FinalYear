@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        try {g
+        try {
             switch (requestCode) {
                 case 101:
                     if (resultCode == Activity.RESULT_OK) {
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Set your file path here
                 FileInputStream fstrm = new FileInputStream(imagepath);
                 // Set your server page url (and the file title/description)
-                HttpFileUpload hfu = new HttpFileUpload("http://domain name/web_service/file_upload.php", "ftitle", "fdescription", fname);
+                HttpFileUpload hfu = new HttpFileUpload("/file_upload.php", "ftitle", "fdescription", fname);
                 upflag = hfu.Send_Now(fstrm);
             } catch (FileNotFoundException e) {
                 // Error: File not found

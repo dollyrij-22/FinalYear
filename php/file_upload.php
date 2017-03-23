@@ -5,7 +5,7 @@ require "init.php";
  
  $image = $_POST['image'];
  
- $sql = "INSERT INTO images (image) VALUES (?)";
+ $sql = "INSERT INTO picture (image) VALUES (?)";
  
  $stmt = mysqli_prepare($con,$sql);
  

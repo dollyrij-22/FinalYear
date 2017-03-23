@@ -16,7 +16,7 @@
  if($check == 1){
  echo "Image Uploaded Successfully";
  }else{
- echo "Error Uploading Image";
+ echo "Error in Uploading Image";
  }
  mysqli_close($con);
  }else{

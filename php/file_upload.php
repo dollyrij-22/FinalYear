@@ -1,9 +1,8 @@
 <?php
- error_reporting(0);
  if($_SERVER['REQUEST_METHOD']=='POST'){
  
  $image = $_POST['image'];
- require "init.php";
+ require_once('init.php');
  
  $sql = "INSERT INTO picture (image) VALUES (?)";
  

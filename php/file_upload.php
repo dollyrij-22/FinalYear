@@ -1,24 +1,34 @@
 <?php
- if($_SERVER['REQUEST_METHOD']=='POST'){
- 
- $image = $_POST['image'];
- require_once('init.php');
- 
- $sql = "INSERT INTO picture (image) VALUES (?)";
- 
- $stmt = mysqli_prepare($con,$sql);
- 
- mysqli_stmt_bind_param($stmt,"s",$image);
- mysqli_stmt_execute($stmt);
- 
- $check = mysqli_stmt_affected_rows($stmt);
- 
- if($check == 1){
- echo "Image Uploaded Successfully";
- }else{
- echo "Error Uploading Image";
- }
- mysqli_close($con);
- }else{
- echo "Error";
- }
+
+	if($_SERVER['REQUEST_METHOD']=='POST'){
+		
+		$image = $_POST['image'];
+		
+		require_once('init.php');
+		
+		$sql ="SELECT id FROM picture ORDER BY id ASC";
+		
+		$res = mysqli_query($con,$sql);
+		
+		$id = 0;
+		
+		while($row = mysqli_fetch_array($res)){
+				$id = $row['id'];
+		}
+		
+		$path = "$id.png";
+		
+		$actualpath = "http://attendance-dr22libraryapp.rhcloud.com/$path";
+		
+		$sql = "INSERT INTO picture (image) VALUES ('$actualpath')";
+		
+		if(mysqli_query($con,$sql)){
+			file_put_contents($path,base64_decode($image));
+			echo "Successfully Uploaded";
+		}
+		
+		mysqli_close($con);
+	}else{
+		echo "Error";
+	}
+	?>

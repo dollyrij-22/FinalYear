@@ -18,16 +18,16 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
     public static final String UPLOAD_URL = "http://attendance-dr22libraryapp.rhcloud.com/file_upload.php";
     public static final String UPLOAD_KEY = "image";
     public static final String TAG = "MY MESSAGE";
     private ImageView imageHolder;
     private final int requestCode = 20;
-    Button buttonUpload,capturedImageButton;
+    Button buttonUpload;
     private int PICK_IMAGE_REQUEST = 1;
     private Bitmap bitmap;
-    String encodedImage;
+
     private Uri filePath;
 
     @Override
@@ -35,8 +35,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageHolder = (ImageView)findViewById(R.id.captured_photo);
-        capturedImageButton = (Button)findViewById(R.id.photo_button);
+        Button capturedImageButton = (Button)findViewById(R.id.photo_button);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
+        buttonUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImage();
+            }
+        });
+        capturedImageButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(photoCaptureIntent, requestCode);
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -53,9 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
-
-    private void uploadImage(){
-        class UploadImage extends AsyncTask<Bitmap,Void,String>{
+    private void uploadImage() {
+        class UploadImage extends AsyncTask<Bitmap, Void, String> {
 
             ProgressDialog loading;
             RequestHandler rh = new RequestHandler();
@@ -63,14 +75,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(MainActivity.this, "Uploading Image", "Please wait...",true,true);
+                loading = ProgressDialog.show(MainActivity.this, "Uploading Image", "Please wait...", true, true);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -78,26 +90,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Bitmap bitmap = params[0];
                 String uploadImage = getStringImage(bitmap);
 
-                HashMap<String,String> data = new HashMap<>();
+                HashMap<String, String> data = new HashMap<>();
                 data.put(UPLOAD_KEY, uploadImage);
 
-                String result = rh.sendPostRequest(UPLOAD_URL,data);
+                String result = rh.sendPostRequest(UPLOAD_URL, data);
 
                 return result;
             }
         }
-
         UploadImage ui = new UploadImage();
         ui.execute(bitmap);
-        }
-    @Override
-    public void onClick(View v) {
-        if (v == capturedImageButton) {
-            Intent photoCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(photoCaptureIntent, requestCode);
-        }
-        if(v == buttonUpload) {
-            uploadImage();
-        }
     }
 }

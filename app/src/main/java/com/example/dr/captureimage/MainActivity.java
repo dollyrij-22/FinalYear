@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(this.requestCode == requestCode && resultCode == RESULT_OK){
-            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+             bitmap = (Bitmap)data.getExtras().get("data");
             imageHolder.setImageBitmap(bitmap);
         }
     }

@@ -15,11 +15,11 @@ $sql = "SELECT * FROM `login` WHERE `username` = '".$username."' AND `password` 
 
 $result = mysqli_query($con, $sql)or die(mysql_error());
 
-$row = mysqli_fetch_array($result);
-if(!empty($row)){
-echo 'success';
-}else{
-echo 'failure';
+$response = array();
+
+while($row = mysqli_fetch_array($result)){
+	$response = array("name"=>$row[0],"username"=>$row[6],"password"=>$row[7]);
 }
+echo json_encode(array("user_data"=>$response));
 mysqli_close($con);
 ?>

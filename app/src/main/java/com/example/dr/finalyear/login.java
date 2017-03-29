@@ -112,7 +112,7 @@ public class login extends AppCompatActivity {
                 err = "Exception: " + e.getMessage();
             }
 
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
             i.putExtra("name", NAME);
             i.putExtra("designation", DESIGNATION);
             i.putExtra("specialization", SPECIALIZATION);

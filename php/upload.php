@@ -3,6 +3,7 @@ error_reporting(0);
 require "init.php";
 
 	if($_SERVER['REQUEST_METHOD']=='POST'){
+		SET SESSION time_zone ='-01:30';
 		
 		$image = $_POST['image'];
 		

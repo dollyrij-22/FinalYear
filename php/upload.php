@@ -4,7 +4,7 @@ require "init.php";
 
 	if($_SERVER['REQUEST_METHOD']=='POST'){	
          date_default_timezone_set('Asia/Kolkata');
-         $tm =  date('H:i');	
+         $tm =  date('H:i:s');	
 		
 		$image = $_POST['image'];
 		

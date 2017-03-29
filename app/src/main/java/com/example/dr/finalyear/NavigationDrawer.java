@@ -131,6 +131,10 @@ public class NavigationDrawer extends AppCompatActivity {
         alertDialog.show();
 
     }
+    private void logoutData()
+    {
+        
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -175,6 +179,7 @@ public class NavigationDrawer extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
+                        logoutData();
 
                         Intent intent = new Intent(getApplicationContext(), login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

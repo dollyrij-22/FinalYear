@@ -11,9 +11,9 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 
 
-$sql = "SELECT * FROM `login` WHERE username='sp@mmmut' AND password='sp123' ";
+$sql = "SELECT * FROM `login` WHERE username='$username' AND password='$password' ";
 
-$result = mysqli_query($con, $sql)or die(mysql_error());
+$result = mysqli_query($con, $sql);
 
 $response = array();
 

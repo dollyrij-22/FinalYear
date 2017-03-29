@@ -8,7 +8,7 @@ $password = $_POST["password"];
 //$name = "sdf";
 //$password = "sdf";
 
-$sql = "SELECT * FROM `login` WHERE `username`='".$username."' AND `password`='".$password."';";
+$sql = "SELECT * FROM `login`";
 
 $result = mysqli_query($con, $sql);
 

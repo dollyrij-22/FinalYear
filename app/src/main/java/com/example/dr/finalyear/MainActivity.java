@@ -17,7 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String UPLOAD_URL = "http://attendance-dr22libraryapp.rhcloud.com/file_upload.php";
+    public static final String UPLOAD_URL = "http://attendance-dr22libraryapp.rhcloud.com/image_upload.php";
     public static final String UPLOAD_KEY = "image";
     private ImageView imageHolder;
     private final int requestCode = 20;

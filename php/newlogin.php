@@ -8,7 +8,7 @@ $password = $_GET["password"];
 
 $sql = "SELECT * FROM `login` WHERE `username` = '".$username."' AND `password` ='".$password."';";
 
-$result = mysqli_query($con, $sql);
+$result = mysqli_query($con, $sql)or die(mysql_error());
 
 $response = array();
 

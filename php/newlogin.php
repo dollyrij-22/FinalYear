@@ -1,25 +1,23 @@
 <?php 
 error_reporting(0);
-define('HOST','127.11.5.130');
- define('USER','admin97C25cx');
- define('PASS','t8WTLp52Xiwh');
- define('DB','attendance');
- 
- $con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect to database!!!');
+require "init.php";
 
 $username = $_POST["username"];
 $password = $_POST["password"];
 
+//$name = "sdf";
+//$password = "sdf";
 
-$sql = "SELECT * FROM `login` WHERE username='$username' AND password='$password' ";
+$sql = "SELECT * FROM `login` WHERE `username`='".$username."' AND `password`='".$password."';";
 
 $result = mysqli_query($con, $sql);
 
 $response = array();
 
 while($row = mysqli_fetch_array($result)){
-	$response = array("name"=>$row[0],"username"=>$row[6],"password"=>$row[7]);
+	$response = array("designation"=>$row[1],"name"=>$row[0],"password"=>$row[7],"email"=>$row[4],"department"=>$row[5],"specialization"=>$row[2],"phone"=>$row[3],"username"=>$row[6]);
 }
+
 echo json_encode(array("user_data"=>$response));
-mysqli_close($con);
+
 ?>

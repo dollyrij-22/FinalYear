@@ -13,7 +13,7 @@ $result = mysql_query($con, $sql);
 $response = array();
 
 while($row = mysql_fetch_array($result)){
-	$response = array("designation"=>$row[1],"name"=>$row[0],"password"=>$row[7],"email"=>$row[4],"department"=>$row[5],"specialization"=>$row[2],"phone"=>$row[3],"username"=>$row[6]);
+	$response = array("designation"=>$row[2],"name"=>$row[1],"password"=>$row[8],"email"=>$row[5],"department"=>$row[6],"specialization"=>$row[3],"phone"=>$row[4],"username"=>$row[7]);
 }
 echo json_encode(array("user_data"=>$response));
 ?>

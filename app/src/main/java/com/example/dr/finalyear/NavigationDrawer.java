@@ -2,6 +2,7 @@ package com.example.dr.finalyear;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -17,10 +18,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 /**
  * Created by DR on 3/28/2017.
  */
 public class NavigationDrawer extends AppCompatActivity {
+    public static final String UPLOAD_URL = "http://attendance-dr22libraryapp.rhcloud.com/upload.php";
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -28,6 +32,8 @@ public class NavigationDrawer extends AppCompatActivity {
     NavigationView navigationView;
     String name;
     TextView userTV;
+    String user = "username";
+    String dept = "department";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +115,7 @@ public class NavigationDrawer extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
+                        logoutData();
 
                         Intent intent = new Intent(getApplicationContext(), login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -131,9 +138,23 @@ public class NavigationDrawer extends AppCompatActivity {
         alertDialog.show();
 
     }
-    private void logoutData()
-    {
-        
+    private void logoutData() {
+        final String username = getIntent().getStringExtra("username");
+        final String depart = getIntent().getStringExtra("department");
+
+        class BackGround extends AsyncTask<Void,Void, String> {
+            RequestHandler rh = new RequestHandler();
+            @Override
+            protected String doInBackground(Void... params) {
+                HashMap<String, String> data = new HashMap<>();
+                data.put(dept, depart);
+                data.put(user,username);
+                String result = rh.sendPostRequest(UPLOAD_URL, data);
+                return result;
+            }
+        }
+        BackGround b = new BackGround();
+        b.execute();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

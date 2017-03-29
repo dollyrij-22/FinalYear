@@ -20,7 +20,7 @@ require "init.php";
 		
 		$actualpath = "http://attendance-dr22libraryapp.rhcloud.com/$path";
 		
-		$sqlm = "INSERT INTO image (image,username,`date`,`time`) VALUES ('$actualpath','$username',CURDATE(), LOCALTIME())";
+		$sqlm = "INSERT INTO image (image,username,`date`,`time`) VALUES ('$actualpath','$username',CURDATE(), UTC_TIME())";
 		
 		if(mysqli_query($con,$sqlm)){
 			file_put_contents($path,base64_decode($image));

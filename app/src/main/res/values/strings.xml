@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FinalYear</string>
+    <string name="action_settings">Setting</string>
 </resources>

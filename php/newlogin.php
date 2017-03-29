@@ -15,9 +15,7 @@ $result = mysqli_query($con, $sql);
 $response = array();
 
 while($row = mysqli_fetch_array($result)){
-	$response = array("name"=>$row[0],"designation"=>$row[1],"specialization"=>$row[2],"phone"=>$row[3],"email"=>$row[4],"department"=>$row[5],"password"=>$row[7],"username"=>$row[6]);
+	$response = array("designation"=>$row[1],"name"=>$row[0],"password"=>$row[7],"email"=>$row[4],"department"=>$row[5],"specialization"=>$row[2],"phone"=>$row[3],"username"=>$row[6]);
 }
-
 echo json_encode(array("user_data"=>$response));
-
 ?>

@@ -2,8 +2,8 @@
 error_reporting(0);
 require "init.php";
 
-$username = $_POST["username"];
-$password = $_POST["password"];
+$username = $_GET["username"];
+$password = $_GET["password"];
 
 
 $sql = "SELECT * FROM `login` WHERE `username` = '".$username."' AND `password` ='".$password."';";

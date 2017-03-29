@@ -16,7 +16,7 @@ $sql = "SELECT * FROM `login` WHERE `username` = '".$username."' AND `password` 
 $result = mysqli_query($con, $sql)or die(mysql_error());
 
 $row = mysqli_fetch_array($result);
-if(isset($row)){
+if(!empty($row)){
 echo 'success';
 }else{
 echo 'failure';

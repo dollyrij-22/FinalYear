@@ -20,7 +20,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 try{
                     sleep(3000);
-                    Intent startMainScreen = new Intent(getApplicationContext(),MainActivity.class);
+                    Intent startMainScreen = new Intent(getApplicationContext(),login.class);
                     startActivity(startMainScreen);
                     finish();
                 }

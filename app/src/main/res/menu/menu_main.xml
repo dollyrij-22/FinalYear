@@ -2,9 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.dr.attendanceapp.MainActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    <item android:id="@+id/myAccount" android:title="My Account"/>
+    <item android:id="@+id/addToWishlist" android:title="My Wishlist"/>
+    <item android:id="@+id/aboutus" android:title="About Us"/>
+    <item android:id="@+id/menuLogout" android:title="Logout"/>
 </menu>

@@ -2,7 +2,10 @@
 error_reporting(0);
 require "init.php";
 
-	if($_SERVER['REQUEST_METHOD']=='POST'){		
+	if($_SERVER['REQUEST_METHOD']=='POST'){	
+        date_default_timezone_set('Asia/Calcutta');	
+		$temp= strtotime("+5 hours 30 minutes"); 
+        $time = time("H:i:s",$temp);
 		
 		$image = $_POST['image'];
 		
@@ -21,13 +24,12 @@ require "init.php";
 		
 		$actualpath = "http://attendance-dr22libraryapp.rhcloud.com/$path";
 		
-		$sqlm = "INSERT INTO image (image,username,`date`,`time`) VALUES ('$actualpath','$username',CURDATE(),CURTIME()+5:30)";
+		$sqlm = "INSERT INTO image (image,username,`date`,`time`) VALUES ('$actualpath','$username',CURDATE(),'$time')";
 		
 		if(mysqli_query($con,$sqlm)){
 			file_put_contents($path,base64_decode($image));
 			echo "Successfully Uploaded";
-		}
-		
+		}		
 		mysqli_close($con);
 	}else{
 		echo "Error";

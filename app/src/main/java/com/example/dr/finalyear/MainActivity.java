@@ -23,13 +23,25 @@ public class MainActivity extends AppCompatActivity {
     private final int requestCode = 20;
     Button buttonUpload;
     private Bitmap bitmap;
-    String username;
+    String username,lat,longi;
     String name = "username";
+    String latitude = "latitude";
+    String longitude = "longitude";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GPSTracker gpsTracker = new GPSTracker(this);
+        if (gpsTracker.getIsGPSTrackingEnabled())
+        {
+             lat = String.valueOf(gpsTracker.latitude);
+            longi = String.valueOf(gpsTracker.longitude);
+        }
+        else
+        {
+            gpsTracker.showSettingsAlert();
+        }
         imageHolder = (ImageView)findViewById(R.id.captured_photo);
         username = getIntent().getStringExtra("username");
         Button capturedImageButton = (Button)findViewById(R.id.photo_button);
@@ -88,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 HashMap<String, String> data = new HashMap<>();
                 data.put(UPLOAD_KEY, encodedImage);
                 data.put(name,username);
+                data.put(latitude,lat);
+                data.put(longitude,longi);
 
                 String result = rh.sendPostRequest(UPLOAD_URL, data);
 

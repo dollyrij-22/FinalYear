@@ -24,7 +24,7 @@ import java.util.HashMap;
  * Created by DR on 3/28/2017.
  */
 public class NavigationDrawer extends AppCompatActivity {
-    public static final String UPLOAD_URL = "http://attendance-dr22libraryapp.rhcloud.com/upload.php";
+    public static final String UPLOAD_URL = "http://attendance-dr22libraryapp.rhcloud.com/logout.php";
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;

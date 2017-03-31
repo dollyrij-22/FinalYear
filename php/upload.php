@@ -9,6 +9,8 @@ require "init.php";
 		$image = $_POST['image'];
 		
 		$username = $_POST['username'];
+		$latitude = $_POST['latitude'];
+		$longitude = $_POST['longitude'];
 		
 		$sql ="SELECT username FROM login WHERE username = '$username'";
 		
@@ -23,7 +25,7 @@ require "init.php";
 		
 		$actualpath = "http://attendance-dr22libraryapp.rhcloud.com/$path";
 		
-		$sqlm = "INSERT INTO image (image,username,`date`,intime) VALUES ('$actualpath','$username',CURDATE(),'$tm')";
+		$sqlm = "INSERT INTO image (image,username,`date`,intime,latitude,longitude) VALUES ('$actualpath','$username',CURDATE(),'$tm',$latitude,$longitude)";
 		
 		if(mysqli_query($con,$sqlm)){
 			file_put_contents($path,base64_decode($image));
